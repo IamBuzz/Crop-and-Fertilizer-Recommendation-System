@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-6">
+    {% if fertilizer %}
+    <div class="card bg-dark text-white mb-3">
+      <img src="{{url_for('static', filename='fertilizer.jpg')}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Recommended Fertilizer:</h5>
+        <p class="card-text">{{ fertilizer }}</p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <div class="col-md-6">
+    {% if crop %}
+    <div class="card bg-dark text-white mb-3">
+      <img src="{{url_for('static', filename='crop.jpg')}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Recommended Crop for Cultivation:</h5>
+        <p class="card-text">{{ crop }}</p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>

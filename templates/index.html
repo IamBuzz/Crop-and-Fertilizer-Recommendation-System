@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crop Recommendation System</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,300&display=swap");
+      :root {
+        --primary-color: #58f755;
+        --primary-color-dark: #48ea33;
+        --secondary-color: #ca8a04;
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+        --extra-light: #f6fff3;
+        --max-width: 1200px;
+      }
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+      }
+      .predict-heading {
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+
+      body {
+        background: url(https://images.unsplash.com/uploads/141247613151541c06062/c15fb37d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+        background-size: contain;
+        background-position: center;
+        height:  100vh;
+        width: 100wh;
+        align-items: center;
+        justify-content: center;
+        /* overflow: hidden; */
+      }
+
+      
+      a {
+        text-decoration: none;
+      }
+      .navbar-custom .navbar-nav .nav-link {
+        color: var(--text-dark);
+        font-size: 18px;
+        margin: 0 10px;
+      }
+      .navbar-custom .navbar-nav :hover {
+        color: #ffffff;
+      }
+      .navbar-brand{ 
+        font-size: 2rem;
+        font-weight: 700; 
+      }
+      .nav-item a {
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        background: linear-gradient(green 0 0) no-repeat
+          calc(200% - var(--p, 0%)) 100% / 200% var(--p, 0.08em);
+        transition: 0.3s var(--t, 0s),
+          background-position 0.2s calc(0.2s - var(--t, 0s));
+      }
+      .nav-item a:hover {
+        --p: 100%;
+        --t: 0.2s;
+        border-radius: 10px;
+        background-color: green;
+        color: #ffffff;
+      }
+      .output-cards{ 
+        gap: 10px;
+      }
+      .card-text{
+        color: brown;
+      }
+      .predict-button-row{
+        margin-bottom:30px;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light justify-content-center">
+      <a class="navbar-brand" href="#">AgroAI</a>
+    </nav>
+
+    <div class="column">
+      <div class="">
+        <section class="section" id="home">
+          <div id="predict" class="container">
+            <h3 class="predict-heading">Predict Here!!</h3>
+            <form id="predictForm" action="/predict" method="post" class="form-horizontal">
+              <div class="row justify-content-center">
+                <div class="col-sm-4">
+                  <form action="/predict" method="post" class="form-horizontal">
+                    <div class="form-group">
+                      <label for="district" class="control-label">District</label><br>
+                      <select name="District" id="district" class="custom-select" aria-label="Default select example">
+                        <option selected>Select District</option>
+                        <option value="Kolhapur Maharashtra">Kolhapur</option>
+                        <option value="Satara Maharashtra">Satara</option>
+                        <option value="Sangli Maharashtra">Sangli</option>
+                        <option value="Solapur Maharashtra">Solapur</option>
+                        <option value="Pune Maharashtra">Pune</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="rainfall" class="control-label">Rainfall</label>
+                      <input type="number" class="form-control" id="rainfall" name="rainfall" placeholder="Rainfall" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="temperature" class="control-label">Temperature</label>
+                      <input class="form-control" id="temperature" name="temperature" placeholder="Temperature" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="nitrogen" class="control-label">Nitrogen</label>
+                      <input type="number" class="form-control" id="nitrogen" name="nitrogen" placeholder="Enter Nitrogen Value"required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="phosphorus" class="control-label">Phosphorus</label>
+                      <input type="number" class="form-control" id="phosphorus" name="phosphorus" placeholder="Enter Phosphorus Value"required>
+                    </div>
+                    <div class="form-group">
+                      <label for="potassium" class="control-label">Potassium</label>
+                      <input type="number" class="form-control" id="potassium" name="potassium" placeholder="Enter Potassium Value"required>
+                    </div>
+                    <div class="form-group">
+                      <label for="ph" class="control-label">pH</label>
+                      <input type="number" class="form-control" id="ph" name="ph" step="0.1" placeholder="Enter pH Value" required>
+                    </div>
+                </div>
+              </div>
+              <div class="row justify-content-center predict-button-row">
+                <div class="col-sm-2">
+                  <div class="">
+                    <button type="button" class="btn btn-primary btn-block" id="currentDataBtn">Current Data</button>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="">
+                    <button type="submit" class="btn btn-primary btn-block">Predict</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+      <div class="">
+        <!--output cards below this section-->
+        <div class="row justify-content-center output-cards">
+          {%if fertilizer%}
+            <div>
+              <div id="fertilizer-card" class="card text-black mb-3">
+                <!-- <img src="{{url_for('static', filename='fertilizer.jpg')}}" class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                  <h5 class="card-title">Recommended Fertilizer:</h5>
+                  <p class="card-text">{{fertilizer}}</p>
+                </div>
+              </div>
+            </div>
+          {%endif%}
+          {%if crop%}
+            <div>
+              <div id="crop-card" class="card text-black mb-3">
+                <!-- <img src="{{url_for('static', filename='crop.jpg')}}" class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                  <h5 class="card-title">Recommended Crop:</h5>
+                  <p class="card-text">{{crop}}</p>
+                </div>
+              </div>
+            </div>
+          {%endif%}
+        </div>  
+      </div>
+    </div>
+    <script>
+
+      // document.getElementById("predictForm").addEventListener("submit", function(event) {
+      //   // Prevent the default form submission behavior
+      //   event.preventDefault();
+      // });
+      
+      $(document).ready(function() {
+      // Event listener for the "Current Data" button click
+      $('#currentDataBtn').click(function() {
+        // AJAX request to fetch data from PHP script
+        $.ajax({
+          url: 'http://localhost/atharva/fetch-data.php',
+          type: 'GET',
+          dataType: 'json',
+          success: function(data) {
+            // Populate input fields with fetched data
+            $('#nitrogen').val(data.N);
+            $('#phosphorus').val(data.P);
+            $('#potassium').val(data.K);
+            $('#ph').val(data.pH);
+          },
+          error: function(xhr, status, error) {
+            console.error('Error fetching current data:', error);
+          }
+        });
+      });
+    });
+      // OpenWeatherMap API key
+      const apiKey = '68dbaad401564a4384995403231512';
+
+      // Function to fetch weather data for a given district
+      async function fetchWeatherData(district) {
+        const apiUrl = `http://api.weatherapi.com/v1/current.json?key=68dbaad401564a4384995403231512&q=${district}}`;
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data.current.temp_c;
+      }
+      const districtData = new Map([  //average rainfall of the five western maharashtra districts
+        ['Kolhapur Maharashtra', 1000],
+        ['Pune Maharashtra', 1000],
+        ['Satara Maharashtra', 1000],
+        ['Sangli Maharashtra', 800],
+        ['Solapur Maharashtra', 900]
+      ]);
+
+      // Get the select element and input field
+      const districtSelect = document.getElementById('district');
+      const rainfall = document.getElementById('rainfall');
+      const temperatureInput = document.getElementById('temperature');
+
+      // Add event listener to select element
+      districtSelect.addEventListener('change', async function() {
+        const selectedDistrict = this.value;
+        const rainfallOutput = districtData.get(selectedDistrict);
+        rainfall.value = rainfallOutput;
+        try {
+          const temperature = await fetchWeatherData(selectedDistrict);
+          temperatureInput.value = temperature;
+        } catch (error) {
+          console.error('Error fetching weather data:', error);
+        }
+      });
+      function redirectToHome() {
+      // Check if the page is being reloaded
+      if (performance.navigation.type === 1) {
+        // Redirect to the home route
+        window.location.href = '/#';
+      }
+    }
+
+    // Call the function when the page is loaded
+    window.onload = redirectToHome;
+    </script>
+  </body>
+</html>

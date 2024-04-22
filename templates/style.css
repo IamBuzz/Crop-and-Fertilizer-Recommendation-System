@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+  --primary-color: #58f755;
+  --primary-color-dark: #48ea33;
+  --secondary-color: #ca8a04;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --extra-light: #f6fff3;
+  --max-width: 1200px;
+}
+@media (max-width: 576px) {
+  .center-form {
+    width: 90%;
+  }
+}
+@media (min-width: 576px) {
+  .user-info-form {
+    display: inline-block;
+    width: calc(50% - 10px); /* Adjust margin and width as needed */
+    margin-right: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .user-info-form {
+    width: calc(33.333% - 10px); /* Adjust margin and width as needed */
+  }
+}
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  
+}
+.predict-heading {
+  text-align: center;
+  margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+#home{
+  background: url("./assests/background.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.section {
+  height: 100vh;
+}
+a {
+  text-decoration: none;
+}
+.navbar-custom {
+  background-color: var(--extra-light);
+  padding: 10px;
+}
+
+.navbar-custom .navbar-brand {
+  font-size: 24px;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+  color: var(--text-dark);
+  font-size: 18px;
+  margin: 0 10px;
+}
+.navbar-custom .navbar-brand {
+  font-size: 2rem;
+  color: var(--text-dark);
+}
+.navbar-custom .navbar-nav :hover {
+  color: #ffffff;
+}
+.nav-item a {
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  background: linear-gradient(green 0 0) no-repeat calc(200% - var(--p, 0%))
+    100% / 200% var(--p, 0.08em);
+  transition: 0.3s var(--t, 0s),
+    background-position 0.2s calc(0.2s - var(--t, 0s));
+}
+.nav-item a:hover {
+  --p: 100%;
+  --t: 0.2s;
+  border-radius: 10px;
+  background-color: green;
+  color: #ffffff;
+}
+.parent {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* .center-form {
+  text-align: center;
+  height: 450px;
+  width: 800px;
+  background: rgb(128, 128, 128, 0.3);
+}
+.center-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px 0;
+  color: #ffffff;
+} */
+.user-info-form {
+  justify-content: center;
+  align-items: center;
+}
+form{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.btnn{
+  left: 50%;
+}
